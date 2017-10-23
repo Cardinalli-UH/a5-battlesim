@@ -3,7 +3,7 @@
  * 100 points for the game code.
    * **Due Monday 11/6**
  * 20 points for writing a code review.
-   * **Code reviews will be done in class Wed 10/30. Your game should be somewhat working**
+   * **Code reviews will be done in class Mon 10/30. Your game should be somewhat working**
  * 20 for using code reviewer suggestions.
  
  ## Instructions
