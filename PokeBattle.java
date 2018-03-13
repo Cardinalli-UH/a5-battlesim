@@ -4,12 +4,12 @@ import java.util.Scanner;
 /**
  * @author Robert Cardinalli
  * @since 06 Mar 2018
- * @version 1.0
+ * @version 1.1
  */
 public class PokeBattle {
 
 	/**
-	 * method table of contents:
+	 * method table of contents::
 	 * main method -
 	 * switchBoard() -main menu controls
 	 * printChoices() -displays Pokemon
@@ -33,6 +33,8 @@ public class PokeBattle {
 	 * Main Method.
 	 * creates two trainers to battle
 	 * prints main menu
+	 * takes in choice
+	 * calls switchBoard()
 	 * 
 	 * @param args
 	 *            not used
@@ -42,6 +44,13 @@ public class PokeBattle {
 		// creates Trainers(Players)
 		Trainer p1 = new Trainer();
 		Trainer p2 = new Trainer();
+
+		System.out.println("WELCOME! TO POKEMON FIGHT CLUB!!");
+		delay();
+		System.out.println("Two Trainers enter!  One Trainer leaves!");
+		delay();
+		System.out.println("  TEST YOUR MIGHT!  POKE'FIGHT!!!!  ");
+		delay();
 
 		do {
 
@@ -91,9 +100,18 @@ public class PokeBattle {
 			case "3":
 
 				// commences battle if both players have chosen Pokemon
-				if (p1.mon == null || p2.mon == null) {
+				if (p1.mon == null && p2.mon == null) {
 					System.out.println(
-							"\nBoth players must choose a Pokemon to battle!\n");
+							"\nBoth Trainers must choose a Pokemon to battle!\n");
+				} else if (p1.mon == null) {
+					System.out.println(p1.name
+							+ ", you're going to be handed a serious whoop down\n"
+							+ " if you don't choose a Pokemon.\n\n");
+				} else if (p2.mon == null) {
+					System.out.println(p2.name
+							+ ", nobody wants to watch you get eaten and turned\n"
+							+ "into Poke'poo.. choose a Pokemon buddy..\n\n");
+
 				} else {
 
 					battleBorder();
@@ -115,8 +133,8 @@ public class PokeBattle {
 			default:
 				// if (!choice.matches("0")) {
 				System.out.println(
-						"\nInvalid selection, please enter 1, 2, 3, or 4.\n"
-								+ "Sorry, you cannot exit program.  "
+						"\nInvalid entry, please enter 1, 2, 3, or 4.\n"
+								+ "\nTHERE IS NO QUIT!!!  "
 								+ "\n\n          POKE'DEATHMATCH FOOL!!!\n\n");
 				// }
 
@@ -162,7 +180,7 @@ public class PokeBattle {
 	 */
 	static void printChosen(Trainer p) {
 
-		
+		System.out.println();
 		preRoundBorder();
 
 		if (p.mon != null) {
@@ -297,8 +315,9 @@ public class PokeBattle {
 		Trainer second = null;
 
 		boolean oddTurn = true;
-
+		
 		if (coinToss == 0) {
+			System.out.println();
 			first = p1;
 			second = p2;
 		} else {
@@ -307,6 +326,7 @@ public class PokeBattle {
 		}
 
 		System.out.println(first.name + " will begin!");
+		delay();
 
 		/**
 		 * Part 2.
@@ -356,6 +376,7 @@ public class PokeBattle {
 
 		String menu = new String();
 
+		menu += "It is " + attacker.name + "'s turn:\n";
 		menu += "\n";
 		menu += attacker.mon.name + "'s current HP: " + attacker.mon.hP + "\n";
 
@@ -443,13 +464,16 @@ public class PokeBattle {
 
 						// deducts passes from trainer on successful attack
 						attacker.passCount -= 3;
-						System.out.println(
-								attacker.passCount + " pass(es) remaining.");
+						System.out.println("3 passes consumed; "
+								+ attacker.passCount + " pass(es) remaining.");
 
 					} else { // ridicules player for not knowing how to count
 
-						System.out.println("Not enough passes sucka!");
+						System.out.println("Not enough passes sucka!\n\n"
+								+ defender.name + ", feel free to mock "
+								+ attacker.name + " for their epic failure.");
 						specialFail = true;
+						delay();
 					}
 
 					break;
@@ -468,8 +492,8 @@ public class PokeBattle {
 
 				default:
 
-					System.out
-							.println("Invalid:  Trainer must attack or pass.");
+					System.out.println("Invalid: " + attacker.name
+							+ ", you must attack or pass.");
 
 					invalidTrig = true;
 
@@ -532,11 +556,11 @@ public class PokeBattle {
 			System.out.println(
 					"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 			System.out.println(
-					"~                                                   ~");
+					"~                                                    ~");
+			System.out.println("~          Congrats " + p1.name
+					+ " you have won!          ~");
 			System.out.println(
-					"~     Congrats " + p1.name + " you have won!          ~");
-			System.out.println(
-					"~                                                   ~");
+					"~                                                    ~");
 			System.out.println(
 					"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 			System.exit(0);
@@ -547,10 +571,12 @@ public class PokeBattle {
 	 * beyond here are print methods used for borders/display purposes only.
 	 */
 	static void battleBorder() {
+		System.out.println("OOOOOOOOOOOHHHH SNAP!  IT IS ON!!");
+		delay();
 		System.out.println("************************************************");
 		System.out.println("=======!!!COMMENCE POKE'MORTAL KOMBAT!!!========");
 		System.out.println("************************************************");
-
+		delay();
 	}
 
 	static void preRoundBorder() {
@@ -573,5 +599,19 @@ public class PokeBattle {
 
 		System.out.println("...press Enter to continue.");
 		input.nextLine();
+
+	}
+
+	static void delay() {
+
+		try {
+
+			Thread.sleep(1000);
+
+			System.out.println();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
 	}
 }
