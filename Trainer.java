@@ -1,25 +1,47 @@
-import java.util.Scanner;
-
+/**
+ * 
+ * @author Dre
+ * @since 06 Mar 2018
+ * @version 1.1
+ * 
+ * Trainer.java is used by PokeBattle.java.
+ * -the class defines a trainer which can battle
+ * 
+ * a trainer has a pokemon
+ * a trainer may pass
+ * 
+ *
+ */
 class Trainer {
 
-	int passCount = 0;
+	// used to track a trainers passes
+	protected int passCount = 0;
 
+	// assigns trainer default number
 	protected static int number = 0;
 
-	String name = "";
+	protected String name = "";
 
-	Pokemon mon = null;
+	// null pokemon
+	protected Pokemon mon = null;
 
-	public Trainer() {
+	/**
+	 * constructor, provides trainer with default name.
+	 */
+	Trainer() {
 
 		this.number++;
 
 		this.name = "Trainer " + number;
 	}
 
-	void setMon(Pokemon mon) {
+	/**
+	 * @param mon
+	 *            the chosen pokemon
+	 */
+	void setMon(Pokemon chosenMon) {
 
-		this.mon = mon;
+		this.mon = chosenMon;
 
 	}
 

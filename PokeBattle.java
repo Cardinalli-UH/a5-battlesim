@@ -4,7 +4,7 @@ import java.util.Scanner;
 /**
  * @author Robert Cardinalli
  * @since 06 Mar 2018
- * @version 1.1
+ * @version 1.2
  */
 public class PokeBattle {
 
@@ -64,12 +64,17 @@ public class PokeBattle {
 
 			// main menu controls
 			switchBoard(p1, p2);
-
+			
+			
+			
+			
 		} while (true);
 
 	} // end of main driver
 
 	/**
+	 * switchboard handles all main menu input.
+	 * 
 	 * @param p1
 	 *            player 1
 	 * @param p2
@@ -100,6 +105,10 @@ public class PokeBattle {
 			case "3":
 
 				// commences battle if both players have chosen Pokemon
+				// the if statement confirms both users have pokemon
+				// gets jazzy if one trainer doesn't have a pokemon
+				
+				
 				if (p1.mon == null && p2.mon == null) {
 					System.out.println(
 							"\nBoth Trainers must choose a Pokemon to battle!\n");
@@ -114,9 +123,10 @@ public class PokeBattle {
 
 				} else {
 
+					//displays border
 					battleBorder();
 
-					// starts the fight
+					// starts the fight, takes over
 					battleSim(p1, p2);
 				}
 
@@ -247,7 +257,6 @@ public class PokeBattle {
 			// prompts user to enter Pokemon name
 			takeName(p, mon);
 			postRoundBorder();
-
 			p.mon = mon;
 
 			// displays: [Player] has chosen [Pokemon]
@@ -311,11 +320,14 @@ public class PokeBattle {
 
 		int coinToss = (int) (Math.random() * 2);
 
+		
+		//creates two default trainers to be fleshed out by parameter trainers
 		Trainer first = null;
 		Trainer second = null;
 
 		boolean oddTurn = true;
 		
+		//le coin toss
 		if (coinToss == 0) {
 			System.out.println();
 			first = p1;
@@ -354,7 +366,7 @@ public class PokeBattle {
 
 		victoryCheck(p1, p2);
 
-		victoryCheck(p2, p1);
+		//victoryCheck(p2, p1);
 
 	} // end of battle simulation method
 
@@ -382,7 +394,6 @@ public class PokeBattle {
 
 		menu += "Enemy ";
 		menu += defender.mon.name + "'s current HP: " + defender.mon.hP + "\n";
-
 		menu += "\n\n";
 
 		menu += attacker.name + " choose what your " + attacker.mon.name
@@ -420,6 +431,11 @@ public class PokeBattle {
 
 			battleMenu(attacker, defender);
 
+			
+			/*these booleans flip if user input calls for do-loop to repeat
+			 * specialFail: if a user tries to special attack with < 3 passes
+			 * invalidTrig: if the switch's default is reached 
+			 */
 			specialFail = false;
 			invalidTrig = false;
 
@@ -556,14 +572,18 @@ public class PokeBattle {
 			System.out.println(
 					"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 			System.out.println(
-					"~                                                    ~");
+					"~                                                   ~");
 			System.out.println("~          Congrats " + p1.name
-					+ " you have won!          ~");
+					+ " you have won!         ~");
 			System.out.println(
-					"~                                                    ~");
+					"~                                                   ~");
 			System.out.println(
 					"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 			System.exit(0);
+		}
+		
+		else {
+			victoryCheck(p2, p1);
 		}
 	}
 
@@ -571,6 +591,7 @@ public class PokeBattle {
 	 * beyond here are print methods used for borders/display purposes only.
 	 */
 	static void battleBorder() {
+		
 		System.out.println("OOOOOOOOOOOHHHH SNAP!  IT IS ON!!");
 		delay();
 		System.out.println("************************************************");
@@ -602,6 +623,9 @@ public class PokeBattle {
 
 	}
 
+	/**
+	 * simply holds the program for 1 second.
+	 */
 	static void delay() {
 
 		try {
